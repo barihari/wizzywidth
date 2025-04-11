@@ -1,0 +1,18 @@
+{
+    "manifest_version": 3,
+    "name": "Width Inspector",
+    "version": "1.0",
+    "description": "Hover over elements to see their width properties.",
+    "permissions": ["activeTab", "storage"],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "action": {},
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content.js"],
+        "css": ["styles.css"]
+      }
+    ]
+  }

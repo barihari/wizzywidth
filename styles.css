@@ -1,0 +1,5 @@
+#width-inspector-tooltip {
+    display: none;
+    position: absolute;
+    pointer-events: none; /* Prevent the tooltip from blocking mouse events */
+}
