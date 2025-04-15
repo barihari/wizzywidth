@@ -59,8 +59,30 @@ function showTooltip(event, element) {
         Nesting Level: ${nestingLevel}
     `;
     
-    tooltip.style.left = `${event.pageX + 10}px`;
-    tooltip.style.top = `${event.pageY + 10}px`;
+    // Calculate tooltip position using clientX/clientY for viewport-relative coordinates
+    const tooltipWidth = tooltip.offsetWidth;
+    const tooltipHeight = tooltip.offsetHeight;
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    
+    // Use clientX/clientY for viewport-relative positioning
+    let left = event.clientX + 10;
+    let top = event.clientY + 10;
+    
+    // Adjust position if tooltip would go off-screen
+    if (left + tooltipWidth > viewportWidth) {
+        left = event.clientX - tooltipWidth - 10;
+    }
+    if (top + tooltipHeight > viewportHeight) {
+        top = event.clientY - tooltipHeight - 10;
+    }
+    
+    // Ensure tooltip stays within viewport bounds
+    left = Math.max(10, Math.min(left, viewportWidth - tooltipWidth - 10));
+    top = Math.max(10, Math.min(top, viewportHeight - tooltipHeight - 10));
+    
+    tooltip.style.left = `${left}px`;
+    tooltip.style.top = `${top}px`;
     tooltip.style.display = 'block';
     
     // Apply outline
